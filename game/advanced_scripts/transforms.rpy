@@ -27,7 +27,7 @@ transform tcommon(x=640, z=0.80):
 transform tinstant(x=640, z=0.80): #This version doesn't fade or scale the character in. They just appear.
         xcenter x yoffset 0 zoom z*1.00 alpha 1.00 yanchor 1.0 ypos 1.03
 
- #This pulls out the character that's talking and makes them a bit bigger
+#This pulls out the character that's talking and makes them a bit bigger
 transform focus(x=640, z=0.80):
     yanchor 1.0 ypos 1.03 subpixel True
     on show:
@@ -140,18 +140,23 @@ transform wiggle_loop(x=640, z=0.80):
     ease 0.15 xoffset 0
     0.1
     repeat
+#Makes character shake lightly
+transform light_shake(x=640, z=0.80):
+    linear 0.5 xoffset 5
+    linear 0.5 xoffset -5
+    repeat
+#Makes character shake faster than light shake
+transform shake(x=640, z=0.80):
+    linear 0.1 xoffset 5
+    linear 0.1 xoffset -5
+    repeat
 
-# Makes character violently shake
-#transform violent_shake:
-    #xcenter x yoffset 0 yanchor 1.0 ypos 1.03 zoom z*1.00 alpha 1.00 subpixel True
-    #linear 0.1 xoffset 10 yoffset 10
-    #linear 0.1 xoffset -10 yoffset -10
-    #linear 0.1 xoffset 10 yoffset 10
-    #linear 0.1 xoffset -10 yoffset -10
-    #linear 0.1 xoffset 10 yoffset 10
-    #linear 0.1 xoffset -10 yoffset -10
-    #linear 0.1 xoffset 0 yoffset 0
-    #repeat
+# Makes character violently shake like
+transform violent_shake(x=640, z=0.80):
+    linear 0.01 xoffset 5
+    linear 0.01 xoffset -5
+    repeat
+
 
 
 
@@ -420,28 +425,73 @@ transform wl22:
     wiggle_loop(800)
 transform wl11:
     wiggle_loop(640)
+#Same positioning, but with light shake animation
+transform ls41:
+    light_shake(200) 
+transform ls42:
+    light_shake(493)
+transform ls43:
+    light_shake(786)
+transform ls44:
+    light_shake(1080)
+transform ls31:
+    light_shake(240)
+transform ls32:
+    light_shake(640)
+transform ls33:
+    light_shake(1040)
+transform ls21:
+    light_shake(400)
+transform ls22:
+    light_shake(800)
+transform ls11:
+    light_shake(640)
+
+#Same positioning, but with med shake animation
+transform ms41:
+    shake(200) 
+transform ms42:
+    shake(493)
+transform ms43:
+    shake(786)
+transform ms44:
+    shake(1080)
+transform ms31:
+    shake(240)
+transform ms32:
+    shake(640)
+transform ms33:
+    shake(1040)
+transform ms21:
+    shake(400)
+transform ms22:
+    shake(800)
+transform ms11:
+    shake(640)
+
+
 
 #Same positioning, but with violent shake animation
-#transform vs41:
-    #violent_shake(200) 
-#transform vs42:
-    #violent_shake(493)
-#transform vs43:
-    #violent_shake(786)
-#transform vs44:
-    #violent_shake(1080)
-#transform vs31:
-    #violent_shake(240)
-#transform vs32:
-    #violent_shake(640)
-#transform vs33:
-    #violent_shake(1040)
-#transform vs21:
-    #violent_shake(400)
-#transform vs22:
-    #violent_shake(800)
-#transform vs11:
-    #violent_shake(640)
+transform vs41:
+    violent_shake(200) 
+transform vs42:
+    violent_shake(493)
+transform vs43:
+    violent_shake(786)
+transform vs44:
+    violent_shake(1080)
+transform vs31:
+    violent_shake(240)
+transform vs32:
+    violent_shake(640)
+transform vs33:
+    violent_shake(1040)
+transform vs21:
+    violent_shake(400)
+transform vs22:
+    violent_shake(800)
+transform vs11:
+    violent_shake(640)
 
 
 
@@ -682,3 +732,4 @@ init python:
 transform malpha(a=1.00):
     i11
     alpha a
+
