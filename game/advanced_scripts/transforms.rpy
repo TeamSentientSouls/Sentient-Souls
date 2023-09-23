@@ -161,6 +161,7 @@ transform violent_shake(x=640, z=0.80):
 
 
 
+
 #Normal positioning and animation, based on number of characters on screen
 #First number is how many characters, second is the character's position
 transform t41: #Leftmost of 4 characters
@@ -577,6 +578,36 @@ define trueblack = MultipleTransition([
     Solid("#000")
     ])
 
+# Override wipeup with a proper-looking wipe that has a nice fade to it
+define wipeup = ImageDissolve("mod_assets/wipeup.png", 0.5, ramplen=64)
+
+# Wipe up to black, pause for .25 seconds, then wipe to the next scene
+define wipeup_scene = MultipleTransition([
+    False, ImageDissolve("mod_assets/wipeup.png", 0.5, ramplen=64),
+    Solid("#000"), Pause(0.25),
+    Solid("#000"), ImageDissolve("mod_assets/wipeup.png", 0.5, ramplen=64),
+    True])
+
+# Override wipedown with a proper-looking wipe that has a nice fade to it
+define wipedown = ImageDissolve("images/menu/wipedown.png", 0.5, ramplen=64)
+
+# Wipe down to black, pause for .25 seconds, then wipe to the next scene
+define wipedown_scene = MultipleTransition([
+    False, ImageDissolve("images/menu/wipedown.png", 0.5, ramplen=64),
+    Solid("#000"), Pause(0.25),
+    Solid("#000"), ImageDissolve("images/menu/wipedown.png", 0.5, ramplen=64),
+    True])
+
+# Override wiperight with a proper-looking wipe that has a nice fade to it
+define wiperight = ImageDissolve("mod_assets/wiperight.png", 0.5, ramplen=64)
+
+# Wipe right to black, pause for .25 seconds, then wipe to the next scene
+define wiperight_scene = MultipleTransition([
+    False, ImageDissolve("mod_assets/wiperight.png", 0.5, ramplen=64),
+    Solid("#000"), Pause(0.25),
+    Solid("#000"), ImageDissolve("mod_assets/wiperight.png", 0.5, ramplen=64),
+    True])
+
 #Override wipeleft with a proper-looking wipe that has a nice fade to it
 define wipeleft = ImageDissolve("images/menu/wipeleft.png", 0.5, ramplen=64)
 
@@ -732,4 +763,3 @@ init python:
 transform malpha(a=1.00):
     i11
     alpha a
-
