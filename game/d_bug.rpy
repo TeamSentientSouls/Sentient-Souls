@@ -1,11 +1,16 @@
 
 
 init python:
+    import os 
+
+    
     def edit_txt(file_name, text):
         with open(config.gamedir + "/" + file_name, "w") as f:
             f.write(text)
         return
 label d_bug:
+
+    scene bg club_day2
 
     "Welcome what should we test out?"
 
@@ -15,7 +20,7 @@ label d_bug:
             menu:
                 "Screen tear":
                     show screen tear(20, 0.1, 0.1, 0, 40)
-                    pause 5.0
+                    pause 3.0
                     hide screen tear
                     jump d_bug
 
@@ -138,10 +143,58 @@ label d_bug:
 
         "Write file in Sentient Souls folder":
             $ edit_txt("Hey.txt", "Did this work finally?")
-            
-                
-            
             "File should be in Sentient Souls folder go check"
+            jump d_bug
+
+        "Test screen transform":
+            scene bg class_day
+            with dissolve
+            "Dissolve"
+            scene bg club_day2
+            with dissolve_cg
+            "Dissolve CG"
+            scene bg class_day
+            with dissolve_scene
+            "Dissolve scene"
+            scene bg club_day2
+            with dissolve_scene_full
+            "Dissolve scene full"
+            scene bg class_day
+            with dissolve_scene_half
+            "Dissolve Half"
+            scene bg club_day2
+            with trueblack
+            "True black"
+            scene bg class_day
+            with close_eyes
+            "Close eyes"
+            scene bg club_day2
+            with open_eyes
+            "Open eyes"
+            scene bg class_day
+            with wipeleft
+            "Wipe left"
+            scene bg club_day2
+            with wipeleft_scene
+            "Wipe left scene"
+            scene bg class_day
+            with wipedown
+            "Wipe down"
+            scene bg club_day2
+            with wipedown_scene
+            "Wipe down scene"
+            scene bg class_day
+            with wipeup
+            "Wipe up"
+            scene bg club_day2
+            with wipeup_scene
+            "Wipe up scene"
+            scene bg class_day
+            with wiperight
+            "Wipe right"
+            scene bg club_day2
+            with wiperight_scene
+            "Wipe right scene"
             jump d_bug
 
 
@@ -173,8 +226,12 @@ label d_bug:
             "Custom transform that I made: wiggle"
             show monika 3a at wl11 zorder 1
             "Custom transform that I made: wiggle looped"
-            #show monika 3a at vs11 zorder 1
-            #"Custom transform that I made: violent shake"
+            show monika 3a at ls11 zorder 1
+            "Custom transform that I made: light shake"
+            show monika 3a at ms11 zorder 1
+            "Custom transform that I made: medium shake"
+            show monika 3a at vs11 zorder 1
+            "Custom transform that I made: violent shake"
             show monika zorder 1 at rhide
             hide monika
             "Custom transform that I made: Slide exit on right"
