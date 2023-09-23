@@ -6,10 +6,7 @@
 #If you plan on adding new content, pop them over down there and mimic the appropriate lines!
 define persistent.demo = False
 define persistent.steam = False
-define config.developer = True #Change this flag to True to enable dev tools
-
-
-
+define config.developer = False #Change this flag to True to enable dev tools
 
 python early:
     import singleton
@@ -120,6 +117,15 @@ define audio.MT2 = "<loop 0>mod_assets/MT2.ogg"
 define audio.YT = "<loop 0>mod_assets/YT.ogg"
 define intro_monika = "<loop 0>mod_assets/intro_monika.mp3"
 define intro_yuri = "<loop 0>mod_assets/intro_yuri.mp3"
+define yuri_panic = "<loop 0>mod_assets/panic.wav"
+define uyuri_panic = "<loop 0>mod_assets/yuripanic.wav"
+define yurirecover = "<loop 0>mod_assets/yurirecover.wav"
+define maintheme = "<loop 0>mod_assets/mainmenusong.wav"
+define MW = "<loop 0>mod_assets/walkingwithmonika.wav"
+define rainclouds = "<loop 0>mod_assets/rainclouds.mp3"
+define ifonlyyou = "<loop 0>mod_assets/ifonlyyouknew.mp3"
+define suspensepiano = "<loop 0>mod_assets/sp.mp3"
+define creepypanic = "<loop 0>mod_assets/creepypanic.wav"
 
 
 
@@ -135,6 +141,8 @@ define audio.closet_open = "sfx/closet-open.ogg"
 define audio.closet_close = "sfx/closet-close.ogg"
 define audio.page_turn = "sfx/pageflip.ogg"
 define audio.fall = "sfx/fall.ogg"
+define audio.wind = "mod_assets/windsfx.mp3"
+define audio.glass = "mod_assets/glassbreaks.mp3"
 
 # Backgrounds
 image black = "#000000"
@@ -147,11 +155,14 @@ image end:
     "gui/end.png"
 image bg monikaact1 = "mod_assets/monika.png" #custom for monika act 1 
 image bg yuriact1 = "mod_assets/yuriact1.png" #custom for yuri act 1
+image bg park = "mod_assets/parkbackground.jpg"
 image bg natsukiact1 = "mod_assets/natsukiact1.png" #custom for natsuki act 1 
 image bg residential_day = "bg/residential.png"
 image bg class_day = "bg/class.png"
+image bg class = "bg/class.png"
 image bg corridor = "bg/corridor.png"
 image bg club_day = "bg/club.png"
+image bg residential_night = "mod_assets/residential_night.png" #custom assets, MC's residential neighborhood, but night. 
 image bg club_day2:
     choice:
         "bg club_day"
@@ -1342,6 +1353,7 @@ define m = DynamicCharacter('m_name', image='monika', what_prefix='"', what_suff
 define n = DynamicCharacter('n_name', image='natsuki', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
 define y = DynamicCharacter('y_name', image='yuri', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
 define ny = Character('Nat & Yuri', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
+define mys = Character('???', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
 
 define _dismiss_pause = config.developer
 
@@ -1382,6 +1394,7 @@ default s_name = "Sayori"
 default m_name = "Monika"
 default n_name = "Natsuki"
 default y_name = "Yuri"
+default mys = "???" 
 
 # Instantiating variables for poem appeal. This is how much each character likes the poem for each day.
 # -1 = Dislike, 0 = Neutral, 1 = Like
@@ -1433,4 +1446,8 @@ default sayori_confess = True
 # We read Natsuki's confession poem in chapter 23.
 default natsuki_23 = None
 
-
+#In case we want to write a txt file in the directory use this function
+init python:
+    def write_file(file_path, text):
+        with open(file_path, "w") as file:
+            file.write(text)
