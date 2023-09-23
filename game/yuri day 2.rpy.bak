@@ -621,7 +621,7 @@ label yuri_day2:
     mc "Do you mind if I read your poem now?"
     y 1d "Certainly! I'd love to share my thought process behind it."
     "Yuri smiles dreamily, as if it's a rare opportunity for her. That's kind've ironic.. considering we are in a literature club."
-    call showpoem (poem_y1) from _call_showpoem
+    call showpoem (poem_y1)
     y 1g "That took you a while to read.."
     y 4b "Is my handwriting that bad?"
     mc "What? No! I wasn't thinking that at all!"
@@ -699,7 +699,7 @@ label yuri_day2:
     m "But don't be afraid to experiment!"
     m 1a "Do you want to read my poem now?"
     mc "Sure thing!"
-    call showpoem (poem_m1) from _call_showpoem_1
+    call showpoem (poem_m1)
     m 1b "So, what do you think?"
     mc "I love the poem Monika!"
     mc "It's very abstract, and freeform, if that's what you call it."
@@ -740,7 +740,7 @@ label yuri_day2:
     n 1t "Well, you need to get your head out of the gutter."
     n "Let me show you how a real pro writes!"
     "Natsuki excitedly gives me her poem."
-    call showpoem (poem_n1) from _call_showpoem_2
+    call showpoem (poem_n1)
     n "Pretty good right?"
     mc "Wow, I actually really like the poem!"
     n 1d "Really?"
@@ -782,7 +782,7 @@ label yuri_day2:
     mc "Perhaps.."
     s 4x "Wanna see my poem now?"
     mc "Of course!"
-    call showpoem (poem_s1) from _call_showpoem_3
+    call showpoem (poem_s1)
     mc "Sayori.. Did you perhaps write this poem this morning?"
     s 4m "What? Of course not!"
     s 5a "I wouldn't write it this morning..."
