@@ -1,5 +1,5 @@
 
-#In Python because of the dollar sign
+#Use dollar sign if you want to use  python
 $ switch = True
 
 #Ren'py
@@ -9,7 +9,7 @@ define decision_variable = 1
 define decision_variable3 = None 
 
 label story:
-    call d_bug from _call_d_bug
+    # call d_bug from _call_d_bug
     scene black
     stop music fadeout 0.5
     $ restore_all_characters()
@@ -17,14 +17,13 @@ label story:
     play sound "sfx/s_kill_glitch1.ogg"
     pause 0.50
     hide screen tear
-    "..."
-    $ m_name = glitchtext(12)
-    m "Hel-{nw}?"
+    mg "..."
+    mg "Hel-{nw}?"
     show screen tear (20, 0.1, 0.1, 0, 40)
     play sound "sfx/s_kill_glitch1.ogg"
     pause 0.50
     hide screen tear 
-    m "Hello, [player]? Can you hear me? "
+    mg "Hello, [player]? Can you hear me? "
     menu:
         "Yes..": 
             $ switch = True
@@ -34,22 +33,22 @@ label story:
         play sound "sfx/s_kill_glitch1.ogg"
         pause 0.50
         hide screen tear
-        m "Great!" 
-        m "I know that you wanted the Literature club to be a happy place, I messed that up."
-        m  "So I'll restore everything to how it was." 
-        m  "You can get your happy ending.."
-        m  "..."
+        mg "Great!" 
+        mg "I know that you wanted the Literature club to be a happy place, I messed that up."
+        mg  "So I'll restore everything to how it was." 
+        mg  "You can get your happy ending.."
+        mg  "..."
         play music mend 
-        m  "I-I really do love you, you know?"
-        m "And despite those girls not being real." 
-        m "They are still my friends."
-        m  "And I want you to be happy, and this is how I can help you do that."
-        m "So I won't mess with anything this time!"
-        m "You can get your happy ending!" 
-        m "...."
-        m "Even after everything I did."
-        m "Do you trust me [player]?"
-        m "Or rather can you forgive me [player]?"
+        mg  "I-I really do love you, you know?"
+        mg "And despite those girls not being real." 
+        mg "They are still my friends."
+        mg  "And I want you to be happy, and this is how I can help you do that."
+        mg "So I won't mess with anything this time!"
+        mg "You can get your happy ending!" 
+        mg "...."
+        mg "Even after everything I did."
+        mg "Do you trust me [player]?"
+        mg "Or rather can you forgive me [player]?"
         menu:
             "Yes I forgive you":
                 $ decision_variable = 1
@@ -58,21 +57,21 @@ label story:
     
     if decision_variable == 1:
         default decision_variable2 = None 
-        m "[player]...thank you."
-        m "You are truly a kind person."
-        m  "Now Lets d-{nw}"
+        mg "[player]...thank you."
+        mg "You are truly a kind person."
+        mg  "Now Lets d-{nw}"
         stop music
         show screen tear (20, 0.1, 0.1, 0, 40)
         play sound "sfx/s_kill_glitch1.ogg"
         pause 0.50
         hide screen tear
-        m  "Wait what's going on with the code...?"
+        mg  "Wait what's going on with the code...?"
         hide monika 
         show screen tear (20, 0.1, 0.1, 0, 40)
         play sound("sfx/glitch2.ogg")
         pause 0.50
         hide screen tear
-        m "WHAT THE-{nw}"
+        mg "WHAT THE-{nw}"
         play music t4g
         $ m_name = glitchtext(25)
         show vignette:
@@ -83,8 +82,8 @@ label story:
         $ style.say_window = style.window_monika
         $ style.say_dialogue = style.edited
         $ gtext = glitchtext(19)
-        m "[gtext]{cps=1}{nw}"
-        m "[gtext]{cps=1}{nw}"
+        mg "[gtext]{cps=1}{nw}"
+        mg "[gtext]{cps=1}{nw}"
         $ style.say_dialogue = style.normal
         $ m_name = glitchtext(30)
         menu:
@@ -99,9 +98,9 @@ label story:
     if decision_variable2 == 1:
         $ gtext = glitchtext(30)
         $ style.say_dialogue = style.edited
-        m "[gtext]{cps=1}{nw}"
-        m "[gtext]{cps=1}{nw}"
-        m "[gtext]{cps=1}{nw}"
+        mg "[gtext]{cps=1}{nw}"
+        mg "[gtext]{cps=1}{nw}"
+        mg "[gtext]{cps=1}{nw}"
         $ style.say_dialogue = style.normal
         window hide(None)
         pause 3.0
@@ -117,9 +116,9 @@ label story:
     if decision_variable2 == 2:
         $ gtext = glitchtext(30)
         $ style.say_dialogue = style.edited
-        m "[gtext]{cps=1}{nw}"
-        m "[gtext]{cps=1}{nw}"
-        m "[gtext]{cps=1}{nw}"
+        mg "[gtext]{cps=1}{nw}"
+        mg "[gtext]{cps=1}{nw}"
+        mg "[gtext]{cps=1}{nw}"
         $ style.say_dialogue = style.normal
         window hide(None)
         pause 3.0
@@ -135,9 +134,9 @@ label story:
     if decision_variable2 == 3:
         $ gtext = glitchtext(30)
         $ style.say_dialogue = style.edited
-        m "[gtext]{cps=1}{nw}"
-        m "[gtext]{cps=1}{nw}"
-        m "[gtext]{cps=1}{nw}"
+        mg "[gtext]{cps=1}{nw}"
+        mg "[gtext]{cps=1}{nw}"
+        mg "[gtext]{cps=1}{nw}"
         $ style.say_dialogue = style.normal
         window hide(None)
         pause 3.0
@@ -153,9 +152,9 @@ label story:
     if decision_variable2 == 4:
         $ gtext = glitchtext(30)
         $ style.say_dialogue = style.edited
-        m "[gtext]{cps=1}{nw}"
-        m "[gtext]{cps=1}{nw}"
-        m "[gtext]{cps=1}{nw}"
+        mg "[gtext]{cps=1}{nw}"
+        mg "[gtext]{cps=1}{nw}"
+        mg "[gtext]{cps=1}{nw}"
         $ style.say_dialogue = style.normal
         window hide(None)
         pause 3.0
@@ -170,8 +169,8 @@ label story:
         jump story5 
     if decision_variable == 2:
         stop music
-        m  "..."
-        m  "I see.. so you don't trust me"
+        mg  "..."
+        mg  "I see.. so you don't trust me"
         "Monika makes her way to the console, very disheartened by the player's response."
         $ console_history = []
         call updateconsole("os.remove(\characters/sayori.chr\")", "sayori.chr successfully deleted") from _call_updateconsole_15
@@ -190,7 +189,7 @@ label story:
         $ m_name = glitchtext(30)
         hide screen tear
         $ style.say_window = style.window_monika
-        m  "Truly, no happiness can be found in the Literature Club. what the hell was I thinking?"
+        mg  "Truly, no happiness can be found in the Literature Club. what the hell was I thinking?"
         show screen tear (20, 0.1, 0.1, 0, 40)
         play sound("sfx/glitch1.ogg")
         pause 0.50
