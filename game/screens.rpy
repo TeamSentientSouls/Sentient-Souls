@@ -167,10 +167,51 @@ screen say(who, what):
         text what id "what"
 
         if who is not None:
+            if who == s_name: #Sayori window
+                window:
+                    style "nameboxblue"
+                    text who id "who"
+                    $ style.say_window = style.window_blue
+                    $ style.say_label = style.say_label_blue
+            if who == m_name: #Monika window
+                window:
+                    style "nameboxgreen"
+                    text who id "who"
+                    $ style.say_window = style.window_green
+                    $ style.say_label = style.say_label_green
+            if who == mg_name: #Monika glitch text window
+                window:
+                    style "nameboxgreen"
+                    text who id "who"
+                    $ style.say_window = style.window_green
+                    $ style.say_label = style.say_label_green
+            if who == y_name: #Yuri window
+                window:
+                    style "nameboxpurple"
+                    text who id "who"
+                    $ style.say_window = style.window_purple
+                    $ style.say_label = style.say_label_purple
+            if who == n_name: #Natsuki window
+                window:
+                    style "nameboxpink"
+                    text who id "who"
+                    $ style.say_window = style.window_pink
+                    $ style.say_label = style.say_label_pink
+            if who == player: #MC window
+                window:
+                    style "nameboxbrown"
+                    text who id "who"
+                    $ style.say_window = style.window_mc
+                    $ style.say_label = style.say_label_mc
+            if who != s_name and who != m_name and who != mg_name and who != y_name and who != n_name and who != player: #Everyone else window
+                window:
+                    style "namebox"
+                    text who id "who"
+                    $ style.say_window = style.window
+                    $ style.say_label = style.say_label_default
+        else: #Narrator window, by default equal to mc window
+            $ style.say_window = style.window_mc 
 
-            window:
-                style "namebox"
-                text who id "who"
 
     # If there's a side image, display it above the text. Do not display
     # on the phone variant - there's no room.
@@ -178,6 +219,160 @@ screen say(who, what):
         add SideImage() xalign 0.0 yalign 1.0
 
     use quick_menu
+
+
+# We are not using "style window_blue is window" because it makes the game crash if you use rollback
+# if you don't use rollback you can replace all the window codes for something like this:
+#
+# style window_blue is window:
+#     background Image("/mod_assets/images/gui/textboxblue.png", xalign=0.5, yalign=1.0)
+
+
+style window_blue:
+    xalign 0.5
+    xfill True
+    yalign gui.textbox_yalign
+    ysize gui.textbox_height
+    background Image("/mod_assets/textbox/s_namebox.png", xalign=0.5, yalign=1.0)
+
+style window_mc:
+    xalign 0.5
+    xfill True
+    yalign gui.textbox_yalign
+    ysize gui.textbox_height
+    background Image("/mod_assets/textbox/mc_namebox.png", xalign=0.5, yalign=1.0)
+
+style window_green:
+    xalign 0.5
+    xfill True
+    yalign gui.textbox_yalign
+    ysize gui.textbox_height
+    background Image("/mod_assets/textbox/m_namebox.png", xalign=0.5, yalign=1.0)
+
+style window_purple:
+    xalign 0.5
+    xfill True
+    yalign gui.textbox_yalign
+    ysize gui.textbox_height
+    background Image("/mod_assets/textbox/y_namebox.png", xalign=0.5, yalign=1.0)
+
+style window_pink:
+    xalign 0.5
+    xfill True
+    yalign gui.textbox_yalign
+    ysize gui.textbox_height
+    background Image("/mod_assets/textbox/n_namebox.png", xalign=0.5, yalign=1.0)
+
+style window_gmonika:
+    background Image("mod_assets/textbox/g_textbox_monika.png", xalign=0.5, yalign=1.0)
+    
+# We are not using "style nameboxblue is namebox" because it makes the game crash if you use rollback
+# if you don't use rollback you can replace all the window codes for something like this:
+#
+# style nameboxblue is namebox:
+#     background Frame("/mod_assets/images/gui/nameboxblue.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
+
+style nameboxblue:
+    xpos gui.name_xpos
+    xanchor gui.name_xalign
+    xsize gui.namebox_width
+    ypos gui.name_ypos
+    ysize gui.namebox_height
+    background Frame("/mod_assets/textbox/s_namebox.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
+    padding gui.namebox_borders.padding
+
+style nameboxbrown:
+    xpos gui.name_xpos
+    xanchor gui.name_xalign
+    xsize gui.namebox_width
+    ypos gui.name_ypos
+    ysize gui.namebox_height
+    background Frame("/mod_assets/textbox/mc_namebox.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
+    padding gui.namebox_borders.padding
+
+style nameboxgreen:
+    xpos gui.name_xpos
+    xanchor gui.name_xalign
+    xsize gui.namebox_width
+    ypos gui.name_ypos
+    ysize gui.namebox_height
+    background Frame("/mod_assets/textbox/m_namebox.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
+    padding gui.namebox_borders.padding
+
+style nameboxpurple:
+    xpos gui.name_xpos
+    xanchor gui.name_xalign
+    xsize gui.namebox_width
+    ypos gui.name_ypos
+    ysize gui.namebox_height
+    background Frame("/mod_assets/textbox/y_namebox.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
+    padding gui.namebox_borders.padding
+
+style nameboxpink:
+    xpos gui.name_xpos
+    xanchor gui.name_xalign
+    xsize gui.namebox_width
+    ypos gui.name_ypos
+    ysize gui.namebox_height
+    background Frame("/mod_assets/textbox/n_namebox.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
+    padding gui.namebox_borders.padding
+
+# We are not using "style say_label_blue is say_label" because it makes the game crash if you use rollback
+# if you don't use rollback you can replace all the window codes for something like this:
+#
+# style say_label_blue is say_label:
+#     outlines [(3, "#58b", 0, 0), (1, "#58b", 1, 1)]
+
+style say_label_blue:
+    color gui.accent_color
+    font gui.name_font
+    size gui.name_text_size
+    xalign gui.name_xalign
+    yalign 0.5
+    outlines [(3, "#58b", 0, 0), (1, "#58b", 1, 1)]
+
+style say_label_brown:
+    color gui.accent_color
+    font gui.name_font
+    size gui.name_text_size
+    xalign gui.name_xalign
+    yalign 0.5
+    outlines [(3, "#775f32", 0, 0), (1, "#775f32", 1, 1)]
+
+style say_label_green:
+    color gui.accent_color
+    font gui.name_font
+    size gui.name_text_size
+    xalign gui.name_xalign
+    yalign 0.5
+    outlines [(3, "#5b5", 0, 0), (1, "#5b5", 1, 1)]
+
+style say_label_purple:
+    color gui.accent_color
+    font gui.name_font
+    size gui.name_text_size
+    xalign gui.name_xalign
+    yalign 0.5
+    outlines [(3, "#8755bb", 0, 0), (1, "#8755bb", 1, 1)]
+
+style say_label_pink:
+    color gui.accent_color
+    font gui.name_font
+    size gui.name_text_size
+    xalign gui.name_xalign
+    yalign 0.5
+    outlines [(3, "#e432a8", 0, 0), (1, "#e432a8", 1, 1)]
+
+style say_label_default:
+    color gui.accent_color
+    font gui.name_font
+    size gui.name_text_size
+    xalign gui.name_xalign
+    yalign 0.5
+    outlines [(3, "#b59", 0, 0), (1, "#b59", 1, 1)]
+
+
+    
 
 
 style window is default
@@ -199,6 +394,7 @@ style window:
 
 style window_monika is window:
     background Image("gui/textbox_monika.png", xalign=0.5, yalign=1.0)
+
 
 style namebox:
     xpos gui.name_xpos
