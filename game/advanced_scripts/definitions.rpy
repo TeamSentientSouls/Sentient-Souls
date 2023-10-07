@@ -6,7 +6,7 @@
 #If you plan on adding new content, pop them over down there and mimic the appropriate lines!
 define persistent.demo = False
 define persistent.steam = False
-define config.developer = False #Change this flag to True to enable dev tools
+define config.developer = True #Change this flag to True to enable dev tools
 
 python early:
     import singleton
@@ -1346,12 +1346,13 @@ image monika g2:
 
 ###### Character Variables ######
 # These configure the shortcuts for writing dialog for each character.
-define narrator = Character(ctc="ctc", ctc_position="fixed")
-define mc = DynamicCharacter('player', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
-define s = DynamicCharacter('s_name', image='sayori', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
-define m = DynamicCharacter('m_name', image='monika', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
-define n = DynamicCharacter('n_name', image='natsuki', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
-define y = DynamicCharacter('y_name', image='yuri', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
+define narrator = Character(ctc="ctc", ctc_position="fixed", window_background=Image("mod_assets/textbox/textbox.png", xalign=0.5, yalign=1.0))
+define mc = DynamicCharacter('player', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed", who_style='say_label_brown',window_background=Image("mod_assets/textbox/mc_textbox.png", xalign=0.5, yalign=1.0))
+define s = DynamicCharacter('s_name', image='sayori', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed", who_style='say_label_blue',window_background=Image("mod_assets/textbox/s_textbox.png", xalign=0.5, yalign=1.0))
+define m = DynamicCharacter('m_name', image='monika', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed", who_style='say_label_green',window_background=Image("mod_assets/textbox/m_textbox.png", xalign=0.5, yalign=1.0))
+define mg = DynamicCharacter('mg_name', image='monika', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed", who_style='say_label_green',window_background=Image("mod_assets/textbox/g_textbox_monika.png", xalign=0.5, yalign=1.0))
+define n = DynamicCharacter('n_name', image='natsuki', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed", who_style='say_label_pink',window_background=Image("mod_assets/textbox/n_textbox.png", xalign=0.5, yalign=1.0))
+define y = DynamicCharacter('y_name', image='yuri', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed", who_style='say_label_purple',window_background=Image("mod_assets/textbox/y_textbox.png", xalign=0.5, yalign=1.0))
 define ny = Character('Nat & Yuri', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
 define mys = Character('???', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
 
@@ -1392,6 +1393,7 @@ default faint_effect = None
 
 default s_name = "Sayori"
 default m_name = "Monika"
+default mg_name = glitchtext(12)
 default n_name = "Natsuki"
 default y_name = "Yuri"
 default mys = "???" 
@@ -1451,3 +1453,64 @@ init python:
     def write_file(file_path, text):
         with open(file_path, "w") as file:
             file.write(text)
+
+
+init:
+
+    python:
+    
+        import math
+
+        class Shaker(object):
+        
+            anchors = {
+                'top' : 0.0,
+                'center' : 0.5,
+                'bottom' : 1.0,
+                'left' : 0.0,
+                'right' : 1.0,
+                }
+        
+            def __init__(self, start, child, dist):
+                if start is None:
+                    start = child.get_placement()
+                #
+                self.start = [ self.anchors.get(i, i) for i in start ]  # central position
+                self.dist = dist    # maximum distance, in pixels, from the starting point
+                self.child = child
+                
+            def __call__(self, t, sizes):
+                # Float to integer... turns floating point numbers to
+                # integers.                
+                def fti(x, r):
+                    if x is None:
+                        x = 0
+                    if isinstance(x, float):
+                        return int(x * r)
+                    else:
+                        return x
+
+                xpos, ypos, xanchor, yanchor = [ fti(a, b) for a, b in zip(self.start, sizes) ]
+
+                xpos = xpos - xanchor
+                ypos = ypos - yanchor
+                
+                nx = xpos + (1.0-t) * self.dist * (renpy.random.random()*2-1)
+                ny = ypos + (1.0-t) * self.dist * (renpy.random.random()*2-1)
+
+                return (int(nx), int(ny), 0, 0)
+        
+        def _Shake(start, time, child=None, dist=100.0, **properties):
+
+            move = Shaker(start, child, dist=dist)
+        
+            return renpy.display.layout.Motion(move,
+                          time,
+                          child,
+                          add_sizes=True,
+                          **properties)
+
+        Shake = renpy.curry(_Shake)
+
+    init:
+        $ sshake = Shake((0, 0, 0, 0), 1.0, dist=15)
